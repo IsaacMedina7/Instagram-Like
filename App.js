@@ -270,10 +270,10 @@ const styles = StyleSheet.create({
     marginLeft: 50,
   },
   imagebC: {
-    width: 35,
-    height: 35,
+    width: 30,
+    height: 30,
     borderRadius: 50,
-    marginTop: 15,
+    marginTop: 20,
     marginLeft: 40,
   },
   lineaContainer: {
