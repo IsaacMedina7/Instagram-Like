@@ -19,8 +19,7 @@ import icon15 from './assets/linea.png';
 
 const App = () => {
 
-  const [numberLikes, setNumberLikes] = useState(10371);
-  const [likeColor, setLikeColor] = useState("grey");
+  const [numberLikes, setNumberLikes] = useState(10371)
   const [liked, setLiked] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
 
