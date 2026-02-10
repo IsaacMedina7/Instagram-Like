@@ -1,14 +1,15 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { Ionicons } from "@expo/vector-icons";
+import { useState } from "react";
+
 
 import icon from './assets/foto_de_perfil.png';
 import icon2 from './assets/verified_account.jpg';
 import icon3 from './assets/3puntos.jpg';
 import icon4 from './assets/badbunnyimg.jpg';
-import icon5 from './assets/corazon_insta.jpg';
 import icon6 from './assets/comentar_insta.jpg';
 import icon7 from './assets/repost_insta.png';
 import icon8 from './assets/compartir_insta.png';
-import icon9 from './assets/guardar_insta.jpg';
 import icon10 from './assets/corazon_transparente.png';
 import icon11 from './assets/subirinsta.png';
 import icon12 from './assets/home_insta.png';
@@ -16,7 +17,27 @@ import icon13 from './assets/reels.png';
 import icon14 from './assets/buscar.png';
 import icon15 from './assets/linea.png';
 
-export default function App() {
+const App = () => {
+
+  const [numberLikes, setNumberLikes] = useState(10371);
+  const [likeColor, setLikeColor] = useState("grey");
+  const [liked, setLiked] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
+
+  const handleLikesAndColor = () => {
+    if (liked) {
+      setNumberLikes(numberLikes - 1);
+      setLiked(false);
+    } else {
+      setNumberLikes(numberLikes + 1);
+      setLiked(true);
+    }
+  }
+
+  const handleSave = () => {
+    setIsSaved(!isSaved);
+  }
+
   return (
     <View style={styles.container}>
 
@@ -38,15 +59,19 @@ export default function App() {
       </View>
 
       <View style={styles.iconosContainer}>
-        <Image source={icon5} style={styles.image5} />
-        <Text style={styles.textlike}>12 mill.</Text>
+        <TouchableOpacity onPress={handleLikesAndColor} >
+          <Ionicons name={liked ? "heart" : "heart-outline"} size={28} color={liked ? "red" : "black"} style={styles.image5}></Ionicons>
+        </TouchableOpacity>
+        <Text style={styles.numberLikes}>{numberLikes}</Text>
         <Image source={icon6} style={styles.image6} />
         <Text style={styles.textcomentarios}>143 mil</Text>
         <Image source={icon7} style={styles.image7} />
         <Text style={styles.textrepost}>749 mil</Text>
         <Image source={icon8} style={styles.image8} />
         <Text style={styles.textguardar}>594 mil</Text>
-        <Image source={icon9} style={styles.image9} />
+        <TouchableOpacity onPress={handleSave} >
+          <Ionicons name={isSaved ? "bookmark" : "bookmark-outline"} size={25} color="black" style={styles.image9}></Ionicons>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.descripcionContainer}>
@@ -70,6 +95,8 @@ export default function App() {
     </View>
   );
 }
+
+export default App;
 
 const styles = StyleSheet.create({
   container: {
@@ -147,10 +174,10 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   image5: {
-    width: 30,
+    width: 28,
     height: 25,
-    marginTop: 18,
-    marginLeft: -10,
+    marginTop: 15,
+    marginLeft: -16,
   },
   image6: {
     width: 30,
@@ -171,12 +198,12 @@ const styles = StyleSheet.create({
     marginLeft: -8,
   },
   image9: {
-    width: 20,
-    height: 22,
-    marginTop: 18,
-    marginLeft: 10,
+    width: 30,
+    height: 25,
+    marginTop: 16,
+    marginLeft: 24,
   },
-  textlike: {
+  numberLikes: {
     fontSize: 14,
     fontWeight: '600',
     color: 'black',
@@ -273,7 +300,8 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     borderRadius: 50,
-    marginTop: 20,
+    marginTop: 20
+    ,
     marginLeft: 40,
   },
   lineaContainer: {
